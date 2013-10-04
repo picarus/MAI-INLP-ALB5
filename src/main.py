@@ -14,11 +14,10 @@ if __name__ == '__main__':
     text = clean(); # return text without html
     
     # preprocessing
-    # tokenize
-    # stopwords
-    # stemming
-    # named entities
-    
-    # tagging
+    # tokenize: Dani & Gerard
+    # tagging: Dani & Gerard
+    # stopwords: Dani & Gerard
+    # stemming: Daniel Horowitz
+    # named entities: Jose
     
     pass
