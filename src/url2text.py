@@ -14,9 +14,7 @@ def getFile(url):
     response.close()
     return data;
 
-def clean():
-    url = 'http://en.wikipedia.org/wiki/Mick_Jagger'
-    data=getFile(url);
+def clean(data):
     
     # HTML A TEXT
     soup = BeautifulSoup(data)
@@ -30,5 +28,4 @@ def clean():
     
     text = ''.join(string_list).replace("'",'')
     
-    print(text)
     return text
