@@ -6,10 +6,14 @@ Created on Oct 4, 2013
 
 
 from url2text import clean, getFile
+from namedEntity import processNE
 
 if __name__ == '__main__':
     
     ### iterate the src
+    
+    processNE();
+    
     url = 'http://en.wikipedia.org/wiki/Mick_Jagger'
     data = getFile(url);
     text = clean(data); # return text without html
