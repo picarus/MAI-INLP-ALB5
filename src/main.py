@@ -9,8 +9,8 @@ from url2text import clean, getFile
 
 from namedEntity import processNE, initText
 
-from tokenizer import tokenize
-from tagger import tag_words
+from tokenizer import tokenize_words, tokenize_sentences
+from tagger import tag_words, tag_sentences
 from stopwordcleaner import clear
 
 
@@ -24,18 +24,22 @@ if __name__ == '__main__':
     text = clean(data); # return text without html
     print(text)
     
+    ## Using test text
+    text = initText();    
     
-    text = initText();
     # preprocessing
     
     # tokenize: Dani & Gerard
-    tokenized = tokenize(text)
-    # stopwords: Dani & Gerard
-    #cleartext = clear(tokenized)
+    tokenized = tokenize_sentences(text)
     # tagging: Dani & Gerard
-    tagged_words = tag_words(tokenized)
+    tagged= tag_sentences(tokenized)
+    
     # stemming: Daniel Horowitz
     # named entities: Jose
-    sentences=processNE(tagged_words)
+    sentences = processNE(tagged)
+    print sentences
+    
+    # stopwords should be done as a final step: Dani & Gerard
+    #cleartext = clear(sentences)
     
     pass
