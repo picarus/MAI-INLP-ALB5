@@ -11,10 +11,8 @@ from namedEntity import processNE, initText
 
 from tokenizer import tokenize_words, tokenize_sentences
 from tagger import tag_words, tag_sentences
-from stopwordcleaner import clear
-
-
-
+# from stopwordcleaner import clear
+from lemm_test import lemmstem
 if __name__ == '__main__':    
     
     ### iterate the src
@@ -34,9 +32,13 @@ if __name__ == '__main__':
     # tagging: Dani & Gerard
     tagged= tag_sentences(tokenized)
     
-    # stemming: Daniel Horowitz
     # named entities: Jose
     sentences = processNE(tagged)
+    
+    # lemmarization + stemming: Daniel Horowitz
+    
+    sentences = lemmstem(sentences)
+    
     print sentences
     
     # stopwords should be done as a final step: Dani & Gerard
