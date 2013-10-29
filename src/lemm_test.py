@@ -16,10 +16,9 @@ def lemmstem(sentences):
     
     for sent in sentences:
       
-        nlvs=len(sent.leaves())
+        lvsidx=sent.treepositions('leaves') 
        
-        for idx in xrange(0,nlvs):
-            pos=sent.leaf_treeposition(idx)
+        for pos in lvsidx:
             word=sent[pos][0]
             tag = sent[pos][1]
             rtag = tag[0:2]
