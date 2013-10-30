@@ -11,7 +11,7 @@ def initText():
     Daniel is a writer
     John was born in Los Angeles.
     His wife met him in Costa Rica.
-    Both studied at University of Stanford.
+    Both studied at Stanford University.
     '''
     
     return tt

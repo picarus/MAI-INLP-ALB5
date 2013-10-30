@@ -8,6 +8,6 @@
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">python</pydev_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>${PROJECT_LOC}/lib/beautifulsoup4-4.3.1</path>
-<path>${PROJECT_LOC}/lib/MySQL-python-1.2.4b4</path>
+<path>${PROJECT_LOC}/lib/MySQL-python-1.2.3</path>
 </pydev_pathproperty>
 </pydev_project>
