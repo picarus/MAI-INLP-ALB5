@@ -10,7 +10,7 @@ connection = MySQLdb.connect(host="localhost",user=db_user, passwd=db_password,d
 def access_db(allCntnt=True,bio=True):
 	#Get all the bio or non-bio links generator function
 	cur = connection.cursor()
-	sql = "SELECT link FROM article"
+	sql = "SELECT id,link FROM article"
 	if not allCntnt:
 		sql=sql+" WHERE is_bio = %s;" % (1 if bio else 0) # FIXME what about is_bio = -1?
 	cur.execute(sql)
