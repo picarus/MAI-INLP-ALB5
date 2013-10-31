@@ -8,7 +8,7 @@ import nltk
 
 def initText():
     tt=''' Peter lived in San Francisco.
-    Daniel is a writer
+    Daniel is a writer.
     John was born in Los Angeles.
     His wife met him in Costa Rica.
     Both studied at Stanford University.
