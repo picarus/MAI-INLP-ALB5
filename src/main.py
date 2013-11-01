@@ -14,11 +14,13 @@ from tagger import tag_words, tag_sentences
 from tree2json import pprint_json_tree
 import os
 import codecs
+import json
+
 
 # from stopwordcleaner import clear
 from lemm_test import lemmstem
 
-import json def process_files(rootpath):
+def process_files(rootpath):
     newpath = os.path.join(rootpath, 'processed_json')
     newpath = os.path.join(newpath, '')
     if not os.path.exists(newpath): os.makedirs(newpath)
