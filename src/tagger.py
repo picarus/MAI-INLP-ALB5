@@ -14,10 +14,10 @@ def tag_words(word_list):
     ## Unigram Tagger is used to try different corpus
     ## If it goes wrong, comment this part and use pos_tag function
     tagger = UnigramTagger(brown.tagged_sents(categories='news')[:500])    
-    tagged_words = tagger.tag(word_list)
+    #tagged_words = tagger.tag(word_list)
     
     ## pos_tag is generalized Tagger for NLTK 
-    #tagged_words = nltk.pos_tag(word_list)
+    tagged_words = nltk.pos_tag(word_list)
         
     return tagged_words;
 

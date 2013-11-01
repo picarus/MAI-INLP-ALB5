@@ -1,5 +1,5 @@
 import urllib2
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, NavigableString,Comment
 
 ###inFile = open('Dancers_urls.txt', 'r')
 
@@ -17,37 +17,22 @@ def clean(data):
     
     # HTML A TEXT
     soup = BeautifulSoup(data)
-    soup.encode('ascii', 'ignore')
-    invalid_tags = ['b', 'i', 'u','a','span']
+    [s.extract() for s in soup('script')]
+    text = strip_tags(soup.body,'')
     
-    text_parts = soup.find_all('p')
-    for item in text_parts:  
-          
-        text_parts[text_parts.index(item)] = strip_tags(item, invalid_tags)
-        
-    i=0
-    string_list = []
-    for item in text_parts:
-        i=i+1
-        for string in item.stripped_strings:
-            string_list.append(' ' +str(string)+ ' ')
-    
-    text = ''.join(string_list).replace("'",' ')
-    
-    return text
-
+    return unicode(text)
 
 def strip_tags(soup, invalid_tags):
-
-    for tag in soup.findAll(True):
-        if tag.name in invalid_tags:
-            s = " "            
-            if isinstance(tag, NavigableString):
-                tag = strip_tags(tag, invalid_tags)
-            s += str(tag.contents[0])
-            try:
-                tag.replaceWith(s)
-            except:
-                s=''
-                    
+    
+    s = soup.string
+    if s != None and not (isinstance(s, Comment)):
+        return NavigableString(s)
+    elif (isinstance(s, Comment)) or (len(soup.contents)==0):
+        return NavigableString('')
+    else:
+        tags = soup.children
+        newstring = ''
+        for tag in tags:
+            newstring += unicode(strip_tags(tag,''))
+        soup = NavigableString(newstring)
     return soup

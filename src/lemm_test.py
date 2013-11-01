@@ -25,7 +25,7 @@ def lemmstem(sentences):
             if rtag in dict:
                 lemm=lmtzr.lemmatize( word, dict[rtag] )
                 stem=st.stem(lemm)
-                print word, lemm, stem
+                #print word, lemm, stem #Linia maldita
                 sent[pos]=(word, tag, stem)
             else:
                 sent[pos]=(word, tag, word)

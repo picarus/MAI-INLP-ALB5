@@ -1,23 +1,33 @@
-'''
-Created on Oct 10, 2013
 
-@author: Jose
-'''
+from nltk import WordNetLemmatizer
+from nltk.stem.lancaster import LancasterStemmer
+from nltk.corpus import wordnet
 
-import nltk
 
-def initText():
-    tt=''' Peter lived in San Francisco.
-    Daniel is a writer.
-    John was born in Los Angeles.
-    His wife met him in Costa Rica.
-    Both studied at Stanford University.
-    '''
+lmtzr = WordNetLemmatizer()
+st = LancasterStemmer()
+
+dict = {'VB' :wordnet.VERB,
+        'NN': wordnet.NOUN,
+        'JJ':wordnet.ADJ,
+        'RB':wordnet.ADV }
+
+def lemmstem(sentences):
     
-    return tt
-
-def processNE(sentences):
-    
-    sentences = [ nltk.ne_chunk(sent) for sent in sentences]
+    for sent in sentences:
+      
+        lvsidx=sent.treepositions('leaves') 
+       
+        for pos in lvsidx:
+            word=sent[pos][0]
+            tag = sent[pos][1]
+            rtag = tag[0:2]
+            if rtag in dict:
+                lemm=lmtzr.lemmatize( word, dict[rtag] )
+                stem=st.stem(lemm)
+                #print word, lemm, stem #Linia maldita
+                sent[pos]=(word, tag, stem)
+            else:
+                sent[pos]=(word, tag, word)
     
     return sentences
