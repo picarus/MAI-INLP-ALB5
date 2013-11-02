@@ -39,7 +39,6 @@ def process_files(rootpath):
             f.close()
             text = clean(data); # return text without html
             #print(text)
-            
             ## Using test text
             #text = initText();    
             
@@ -70,8 +69,10 @@ def process_files(rootpath):
             
         except Exception as exc:
             errfile = open('error.txt', 'a')
-            errfile.write(filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n')
+            error = filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n'
+            errfile.write(error)
             errfile.close()
+            print(error)
 
 if __name__ == '__main__':    
     
@@ -81,7 +82,7 @@ if __name__ == '__main__':
     #data = getFile(url);
     
     PATH = "NonBio"
-    PATH = "C:\Users\juan jose\Desktop\INLPTEST"
+    PATH = "C:\Users\Dani\Desktop\NonBio"
     process_files(PATH)
     #PATH = "Bio"
     #process_files(PATH)

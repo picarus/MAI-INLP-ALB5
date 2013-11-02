@@ -1,6 +1,7 @@
 import urllib2
-from bs4 import BeautifulSoup, NavigableString,Comment
+from bs4 import BeautifulSoup, NavigableString,Comment,Doctype
 
+import codecs
 ###inFile = open('Dancers_urls.txt', 'r')
 
 def getFile(url):
@@ -13,12 +14,23 @@ def getFile(url):
     response.close()
     return data;
 
+def doctype(soup):
+    items = [item for item in soup.contents if isinstance(item, Doctype)]
+    return items[0] if items else None
+
 def clean(data):
     
     # HTML A TEXT
     soup = BeautifulSoup(data)
-    [s.extract() for s in soup('script')]
-    text = strip_tags(soup.body,'')
+    doctype(soup).extract()
+    [s.extract() for s in soup.findAll(['head', 'script'])]
+    
+#     a = [unicode(item) for item in soup];
+#     f1 = codecs.open('C:\Users\Dani\Desktop\NonBio\clean.txt', 'w', 'utf-8')
+#     f1.write(unicode("".join(a)))
+#     f1.close()
+    text = strip_tags(soup,'')
+    
     
     return unicode(text)
 
