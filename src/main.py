@@ -82,7 +82,7 @@ if __name__ == '__main__':
     #data = getFile(url);
     
     PATH = "NonBio"
-    PATH = "C:\Users\Dani\Desktop\NonBio"
+    #PATH = "C:\Users\Dani\Desktop\NonBio"
     process_files(PATH)
     #PATH = "Bio"
     #process_files(PATH)
