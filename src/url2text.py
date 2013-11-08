@@ -18,7 +18,11 @@ def doctype(soup):
     items = [item for item in soup.contents if isinstance(item, Doctype)]
     return items[0] if items else None
 
-def clean(data):
+def cleanWIKI(data):
+    ''' your code here'''
+    return None
+
+def cleanHTML(data):
     
     # HTML A TEXT
     soup = BeautifulSoup(data)
@@ -32,8 +36,7 @@ def clean(data):
 #     f1.write(unicode("".join(a)))
 #     f1.close()
     text = strip_tags(soup,'')
-    
-    
+     
     return unicode(text)
 
 def strip_tags(soup, invalid_tags):
