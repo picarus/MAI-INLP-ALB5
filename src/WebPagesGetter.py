@@ -27,8 +27,8 @@ def getWebPagesType(newpath,bio,dbid=0):
             f = open(os.path.join(newpath,ORIGINAL + "_" + str(myid)) + '.html','w')
             text = getFile(url)
             f.write(text)    
-        except Exception:
-            mystr = '%d,%s, %s \r\n' % (myid, url, Exception.message)
+        except Exception as exc:
+            mystr = '%d,%s, %s \r\n' % (myid, url,str(exc))
             print mystr
             fe = open('errors.txt','a')
             fe.write(mystr)

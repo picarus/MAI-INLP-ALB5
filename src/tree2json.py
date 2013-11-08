@@ -3,7 +3,7 @@ Created on Oct 29, 2013
 
 @author: Jose
 '''
-import re
+
 from nltk import Tree
 #from nltk.compat import string_types, unicode_repr
 
@@ -55,11 +55,18 @@ def pprint_json_tree(sentences):
         :return: A JSON representation of this tree.
         :rtype: str
         """
-        text=''
+
+        text='['
         #reserved_chars = re.compile('"\/') # review !!!!
+        first = True
         for sentence in sentences:
             output = pprint(sentence, True, 0)
-            text = text + output # + re.sub(reserved_chars, r'\\\1', output)
+            if not first:
+                text = text + ','
+            text = text + output #re.sub(reserved_chars, r'\\\1', output)
+            first = False
+        text = text + ']'
+
         return text
     
     

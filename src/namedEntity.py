@@ -8,8 +8,11 @@ Created on Oct 10, 2013
 import nltk
 
 def initText():
-    tt=''' Peter lived in San Francisco.
-    Daniel is a writer
+
+    tt=u''' Peter lived in San Francisco.
+    Michael enjoyed the travel to Almer\u00eda.
+    Michael enjoyed the travel to Almeria.
+    Daniel is a writer.
     John was born in Los Angeles.
     His wife met him in Costa Rica.
     Both studied at Stanford University.
