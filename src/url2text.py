@@ -22,7 +22,9 @@ def clean(data):
     
     # HTML A TEXT
     soup = BeautifulSoup(data)
-    doctype(soup).extract()
+    d = doctype(soup)
+    if d != None :
+        d.extract()
     [s.extract() for s in soup.findAll(['head', 'script'])]
     
 #     a = [unicode(item) for item in soup];
