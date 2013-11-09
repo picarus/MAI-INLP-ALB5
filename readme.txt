@@ -90,9 +90,9 @@ SELECT * FROM article WHERE save=1 AND is_bio=0
 To retrieve all the relevant non-biographical documents for a profession, artist:
 
 SELECT a.id FROM article as a, people as p 
-WHERE p.profession=”artist” AND a.people_id=p.id AND a.save=1 AND a.is_bio=0
+WHERE p.profession="artist" AND a.people_id=p.id AND a.save=1 AND a.is_bio=0
 
-To retrieve the id’s of non-biographical and validated documents for a character (Salvador Dali, id=41), the following SQL command must be queried:
+To retrieve the id's of non-biographical and validated documents for a character (Salvador Dali, id=41), the following SQL command must be queried:
 
 SELECT id FROM article WHERE people_id=41 AND save=1 AND is_bio=0 
 
