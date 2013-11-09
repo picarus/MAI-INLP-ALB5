@@ -4,21 +4,16 @@ Created on Oct 4, 2013
 @author: Jose
 '''
 
-
 from url2text import cleanHTML, cleanWIKI
-
-from namedEntity import processNE   #, initText
-
+from namedEntity import processNE   
 from tokenizer import tokenize_sentences
 from tagger import tag_sentences
 from tree2json import pprint_json_tree
+from lemm_test import lemmstem
 import os
 import codecs
 
-
-# from stopwordcleaner import clear
-from lemm_test import lemmstem
-
+####### API STARTS HERE
 
 def preprocessText(textInput):
     """
@@ -47,7 +42,8 @@ def preprocessText(textInput):
     return sentences
 
 def preprocessHTMLText(textStringInput):
-    """Takes as input the contents of an HTML file and removes all HTML tags preserving the textual information.
+    """
+    Takes as input the contents of an HTML file and removes all HTML tags preserving the textual information.
     Applies the preprocessing returning the output of the preprocessText method.
     """
     text = cleanHTML(textStringInput)
@@ -55,7 +51,8 @@ def preprocessHTMLText(textStringInput):
     return sentencesOutput
 
 def preprocessWIKIText(textStringInput):
-    """Takes as input the contents of a WIKI file and removes all wikimedia format preserving the textual information.
+    """
+    Takes as input the contents of a WIKI file and removes all wikimedia format preserving the textual information.
     Applies the preprocessing returning the output of the preprocessText method.
     """
     text = cleanWIKI(textStringInput)
@@ -63,7 +60,8 @@ def preprocessWIKIText(textStringInput):
     return sentencesOutput
 
 def preprocessHTML(fileinput):
-    """ Takes as input a path to an HTML file, loads the file and removes the HTML tags.
+    """
+    Takes as input a path to an HTML file, loads the file and removes the HTML tags.
     Applies the preprocessing returning the output of the preprocessText method.
     """
     textStringInput=readFile(fileinput)
@@ -71,7 +69,8 @@ def preprocessHTML(fileinput):
     return sentencesOutput
 
 def preprocessWIKI(fileinput):
-    """ Takes as input a path to a WIKI file, loads the file and removes the WIKImedia tags.
+    """
+    Takes as input a path to a WIKI file, loads the file and removes the WIKImedia tags.
     Applies the preprocessing returning the output of the preprocessText method.
     """
     textStringInput=readFile(fileinput)
@@ -79,7 +78,8 @@ def preprocessWIKI(fileinput):
     return sentencesOutput
 
 def preprocessHTMLFile(fileinput, fileoutput):
-    """ Takes as parameter a path to an HTML file and after cleaning the HTML tags, preprocess the contents.
+    """
+    Takes as parameter a path to an HTML file and after cleaning the HTML tags, preprocess the contents.
     The output is converted to JSON format and saved to the second file provided as parameter.
     """
     sentencesOutput=preprocessHTML(fileinput)
@@ -87,20 +87,32 @@ def preprocessHTMLFile(fileinput, fileoutput):
     return
     
 def preprocessWIKIFile(fileinput, fileoutput):
-    """ Takes as parameter a path to a WIKI file and after cleaning the WIKI tags, preprocess the contents.
+    """
+    Takes as parameter a path to a WIKI file and after cleaning the WIKI tags, preprocess the contents.
     The output is converted to JSON format and saved to the second file provided as parameter.
     """
     sentencesOutput=preprocessWIKI(fileinput)
     writeFile(fileoutput,sentencesOutput)
     return
 
+####### API FINISHES HERE
+
 def readFile(filename):
+    """ 
+    Loads the specified file and returns its content.
+    The file should not be binary.
+    """
+    
     f = open(filename, 'r')
     data = f.read()
     f.close()
     return data
 
 def writeFile(filename, sentencesOutput):
+    """
+    Converts the NLTK tree structure in sentencesOutput to JSON format.
+    The JSON object is saved to the file specified by filename.
+    """
     s=pprint_json_tree(sentencesOutput)
     f = codecs.open(filename, 'w', 'utf-8')
     f.write(s)
