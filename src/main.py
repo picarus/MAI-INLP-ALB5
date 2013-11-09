@@ -97,6 +97,36 @@ def preprocessWIKIFile(fileinput, fileoutput):
 
 ####### API FINISHES HERE
 
+def processTextFiles(path):
+        
+    files = os.listdir(path)
+    newpath = os.path.join(path, 'clean')
+    if not os.path.exists(newpath): os.makedirs(newpath)
+    
+    for filename in files:
+        print 'Processing', filename + '...'
+        try:  
+            newfilename = filename+ '.json'            
+            preprocessTextFile(os.path.join(path, filename) ,os.path.join(newpath, newfilename))
+        except Exception as exc:
+            errfile = open('error.txt', 'a')
+            error = filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n'
+            errfile.write(error)
+            errfile.close()
+            print(error)
+                
+    return
+
+def preprocessTextFile(fileInput, fileOutput):
+    """
+    Process a clean text file and generates the corresponding JSON file as output
+    """
+    textStringInput=readFile(fileInput)
+    sentencesOutput=preprocessText(textStringInput)
+    #print sentencesOutput
+    writeFile(fileOutput,sentencesOutput)
+    return
+
 def readFile(filename):
     """ 
     Loads the specified file and returns its content.
@@ -146,9 +176,11 @@ if __name__ == '__main__':
     
     #url = 'http://en.wikipedia.org/wiki/Mick_Jagger'
     #data = getFile(url);
+    
+    processTextFiles('dataset')
         
     PATH = "NonBio"
     #PATH = "C:\Users\Dani\Desktop\NonBio"
-    process_files(PATH)
+   # process_files(PATH)
     #PATH = "Bio"
     #process_files(PATH)

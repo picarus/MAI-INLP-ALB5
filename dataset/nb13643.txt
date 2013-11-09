@@ -1,0 +1,41 @@
+Gopinath Kallianpur
+Alumni Distinguished Professor 
+
+Education
+
+B.A. (1945), M.A. (1946), University of Madras; Ph.D. (1951), UNC-Chapel Hill. 
+
+Faculty Positions
+
+University of California, Berkeley (1951-52); Institute of Advanced Study, Princeton (1952-53); Indian Statistical Institute (1953-56); Michigan State University (1956-59, 1961-63); Indiana University (1959-61); University of Minnesota (1963-76); Director, Indian Statistical Institute (1976-79); UNC-Chapel Hill (1979-).
+
+Honors and Awards
+
+Visiting Kolmogorov Professor, Department of Mathematics and Mechanics, Moscow State University, Spring 1996; Fellow, Indian Academy of Sciences; Fellow, IMS; Member, ISI.
+
+Invited Cambanis Memorial Lecturer, Greek Statistics Conference, Piraeus, Greece, May 1997. 
+
+Research Interests
+Kallianpur's current research is in four areas.
+
+(1) A new approach to nonlinear filtering and prediction theory, based on white noise calculus, has been developed in conjunction with R.L. Karandikar. Further ramifications and a possible extension are being considered.
+
+(2) Stochastic differential equations whose solutions take values in duals of nuclear spaces are being investigated. Such equations arise when stochastic partial differential equations do not have regular solutions, and also in various applications in neurophysiology, environmental pollution and certain problems of applied mathematics.
+
+(3) Another actively developing area is concerned with chaos expansions, stochastic integrals and infinite dimensional calculus. This deals with a number of important topics,including the Stratonovich form of multiple Wiener integrals, applications to the Feynman integral, and to anticipative stochastic integration.
+
+(4) The time domain and spectral theory of two parameter stationary random fields is being developed jointly with V. Mandrekar, with a view to applications in texture analysis and image processing. 
+
+Selected Publications
+
+White Noise Theory of Prediction, Filtering and Smoothing (with R.L. Karandikar), Gordon and Breach, London, (1988).
+
+Diffusion equations in duals of nuclear spaces (with I. Mitoma and R. Wolpert), Stochastics, 29 (1990), 285-329.
+
+Homogeneous chaos, p-forms, scaling and the Feynman integral (with G.W. Johnson), Transactions of the American Mathematical Society, 340 (1993), 503-548.
+
+Stochastic Differential Equations in Infinite Dimensions (with J. Xiong), IMS Monograph Series, Vol. 25 (1996). 
+
+Back to Faculty Directory
+
+To the Stat Home Page 
