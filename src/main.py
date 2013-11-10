@@ -207,7 +207,7 @@ if __name__ == '__main__':
         
     NonBioPATH = "NonBio"
     BioPATH = "Bio"
-    BioPATH = "/home/gerard/Escriptori/nlp/Bio"
+    #BioPATH = "/home/gerard/Escriptori/nlp/Bio"
     processWIKIFiles(BioPATH)
 
     #PATH = "C:\Users\Dani\Desktop\NonBio"
