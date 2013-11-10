@@ -20,7 +20,7 @@ def doctype(soup):
 
 def cleanWIKI(data):
     ''' your code here'''
-    return None
+    return data # FIXME returning data to test!
 
 def cleanHTML(data):
     

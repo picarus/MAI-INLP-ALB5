@@ -74,7 +74,7 @@ def preprocessWIKI(fileinput):
     Applies the preprocessing returning the output of the preprocessText method.
     """
     textStringInput=readFile(fileinput)
-    sentencesOutput=preprocessHTMLText(textStringInput)
+    sentencesOutput=preprocessWIKIText(textStringInput)
     return sentencesOutput
 
 def preprocessHTMLFile(fileinput, fileoutput):
@@ -98,7 +98,7 @@ def preprocessWIKIFile(fileinput, fileoutput):
 ####### API FINISHES HERE
 
 def processTextFiles(path):
-        
+    
     files = os.listdir(path)
     newpath = os.path.join(path, 'clean')
     if not os.path.exists(newpath): os.makedirs(newpath)
@@ -106,7 +106,7 @@ def processTextFiles(path):
     for filename in files:
         print 'Processing', filename + '...'
         try:  
-            newfilename = filename+ '.json'            
+            newfilename = filename + '.json'            
             preprocessTextFile(os.path.join(path, filename) ,os.path.join(newpath, newfilename))
         except Exception as exc:
             errfile = open('error.txt', 'a')
@@ -116,6 +116,32 @@ def processTextFiles(path):
             print(error)
                 
     return
+
+def processWIKIFiles(path):
+    
+    newpath = os.path.join(path, 'clean')
+    if not os.path.exists(newpath): os.makedirs(newpath)
+    path = os.path.join(path, 'occupations')
+    occupations = os.listdir(path)
+    for occupation in occupations:
+        occupation_path = os.path.join(path, os.path.join(occupation, 'docs'))
+        files = os.listdir(occupation_path)
+        files.remove('index.txt')
+        for filename in files:
+            print 'Processing', occupation +'/'+filename + '...'
+            try:  
+                newfilename = filename + '.json'
+                new_occupation_path = os.path.join(newpath, occupation)
+                if not os.path.exists(new_occupation_path): os.makedirs(new_occupation_path)
+                preprocessWIKIFile(os.path.join(occupation_path, filename), os.path.join(new_occupation_path, newfilename))
+            except Exception as exc:
+                errfile = open('error.txt', 'a')
+                error = filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n'
+                errfile.write(error)
+                errfile.close()
+                print(error)
+            
+    
 
 def preprocessTextFile(fileInput, fileOutput):
     """
@@ -179,8 +205,12 @@ if __name__ == '__main__':
     
     processTextFiles('dataset')
         
-    PATH = "NonBio"
+    NonBioPATH = "NonBio"
+    BioPATH = "Bio"
+    BioPATH = "/home/gerard/Escriptori/nlp/Bio"
+    processWIKIFiles(BioPATH)
+
     #PATH = "C:\Users\Dani\Desktop\NonBio"
-   # process_files(PATH)
+    # process_files(PATH)
     #PATH = "Bio"
     #process_files(PATH)
