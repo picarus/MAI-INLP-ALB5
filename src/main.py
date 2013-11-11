@@ -159,7 +159,8 @@ def readFile(filename):
     The file should not be binary.
     """
     
-    f = open(filename, 'r')
+    #f = open(filename, 'r')
+    f = codecs.open(filename, 'r', 'utf-8')
     data = f.read()
     f.close()
     return data
@@ -203,11 +204,11 @@ if __name__ == '__main__':
     #url = 'http://en.wikipedia.org/wiki/Mick_Jagger'
     #data = getFile(url);
     
-    processTextFiles('dataset')
+    #processTextFiles('dataset')
         
     NonBioPATH = "NonBio"
     BioPATH = "Bio"
-    #BioPATH = "/home/gerard/Escriptori/nlp/Bio"
+    BioPATH = "C:\Users\danip_000\Desktop"
     processWIKIFiles(BioPATH)
 
     #PATH = "C:\Users\Dani\Desktop\NonBio"

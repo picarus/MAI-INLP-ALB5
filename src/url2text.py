@@ -1,5 +1,6 @@
 import urllib2
 from bs4 import BeautifulSoup, NavigableString,Comment,Doctype
+from wiki2plain import Wiki2Plain
 
 import codecs
 ###inFile = open('Dancers_urls.txt', 'r')
@@ -19,8 +20,11 @@ def doctype(soup):
     return items[0] if items else None
 
 def cleanWIKI(data):
-    ''' your code here'''
-    return data # FIXME returning data to test!
+    
+    wiki2plain = Wiki2Plain(data)
+    text = wiki2plain.text
+    
+    return text # FIXME returning data to test!
 
 def cleanHTML(data):
     
