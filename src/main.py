@@ -59,60 +59,46 @@ def preprocessWIKIText(textStringInput):
     sentencesOutput = preprocessText(text)
     return sentencesOutput
 
-def preprocessHTML(fileinput, codec='utf-8'):
+def preprocessHTML(fileinput):
     """
     Takes as input a path to an HTML file, loads the file and removes the HTML tags.
     Applies the preprocessing returning the output of the preprocessText method.
-    The codec for the file can be specified. The default is 'utf-8'.
-    On windows files the codec 'utf-8-sig' should be used instead.
     """
-    textStringInput=readFile(fileinput, codec)
+    textStringInput=readFile(fileinput)
     sentencesOutput=preprocessHTMLText(textStringInput)
     return sentencesOutput
 
-def preprocessWIKI(fileinput, codec='utf-8'):
+def preprocessWIKI(fileinput):
     """
     Takes as input a path to a WIKI file, loads the file and removes the WIKImedia tags.
     Applies the preprocessing returning the output of the preprocessText method.
-    The codec for the file can be specified. The default is 'utf-8'.
-    On windows files the codec 'utf-8-sig' should be used instead.
     """
-    textStringInput=readFile(fileinput, codec)
+    textStringInput=readFile(fileinput)
     sentencesOutput=preprocessWIKIText(textStringInput)
     return sentencesOutput
 
-def preprocessHTMLFile(fileinput, fileoutput, codec='utf-8'):
+def preprocessHTMLFile(fileinput, fileoutput):
     """
     Takes as parameter a path to an HTML file and after cleaning the HTML tags, preprocess the contents.
     The output is converted to JSON format and saved to the second file provided as parameter.
-    The codec for the file can be specified. The default is 'utf-8'.
-    On windows files the codec 'utf-8-sig' should be used instead.
     """
-    sentencesOutput=preprocessHTML(fileinput, codec)
-    writeFile(fileoutput,sentencesOutput, codec)
+    sentencesOutput=preprocessHTML(fileinput)
+    writeFile(fileoutput,sentencesOutput)
     return
     
-def preprocessWIKIFile(fileinput, fileoutput, codec='utf-8'):
+def preprocessWIKIFile(fileinput, fileoutput):
     """
     Takes as parameter a path to a WIKI file and after cleaning the WIKI tags, preprocess the contents.
     The output is converted to JSON format and saved to the second file provided as parameter.
-    The codec for the file can be specified. The default is 'utf-8'.
-    On windows files the codec 'utf-8-sig' should be used instead.
     """
-    sentencesOutput=preprocessWIKI(fileinput, codec)
-    writeFile(fileoutput,sentencesOutput, codec)
+    sentencesOutput=preprocessWIKI(fileinput)
+    writeFile(fileoutput,sentencesOutput)
     return
 
 ####### API FINISHES HERE
 
-def processTextFiles(path, codec='utf-8'):
-    """
-    For the given path folder, takes all the files on it and tries to clean them.
-    The files are supposed to be text files.
-    The output will be stored in a subfolder called 'clean'.
-    The codec for the files can be specified. The default is 'utf-8'.
-    On windows files the codec 'utf-8-sig' should be used instead.
-    """    
+def processTextFiles(path):
+    
     files = os.listdir(path)
     newpath = os.path.join(path, 'clean')
     if not os.path.exists(newpath): os.makedirs(newpath)
@@ -120,8 +106,8 @@ def processTextFiles(path, codec='utf-8'):
     for filename in files:
         print 'Processing', filename + '...'
         try:  
-            newfilename = filename+ '.json'            
-            preprocessTextFile(os.path.join(path, filename) ,os.path.join(newpath, newfilename), codec)
+            newfilename = filename + '.json'            
+            preprocessTextFile(os.path.join(path, filename) ,os.path.join(newpath, newfilename))
         except Exception as exc:
             errfile = open('error.txt', 'a')
             error = filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n'
@@ -131,9 +117,13 @@ def processTextFiles(path, codec='utf-8'):
                 
     return
 
-
-def processWIKIFiles(path, codec='utf-8'):
-    
+def processWIKIFiles(path):
+    """
+    Processes all the files assuming that they are from Wikipedia with wikimedia tags.
+    The path is assumed to be the root of a folder that contains a subfolder "occupaions"
+    which has inside a folder for every possible occupation, and inside that folder a folder called "docs"
+    with all the wiki files.
+    """
     newpath = os.path.join(path, 'clean')
     if not os.path.exists(newpath): os.makedirs(newpath)
     path = os.path.join(path, 'occupations')
@@ -141,14 +131,15 @@ def processWIKIFiles(path, codec='utf-8'):
     for occupation in occupations:
         occupation_path = os.path.join(path, os.path.join(occupation, 'docs'))
         files = os.listdir(occupation_path)
-        files.remove('index.txt')
+        if 'index.txt' in files:
+            files.remove('index.txt')
         for filename in files:
             print 'Processing', occupation +'/'+filename + '...'
             try:  
                 newfilename = filename + '.json'
                 new_occupation_path = os.path.join(newpath, occupation)
                 if not os.path.exists(new_occupation_path): os.makedirs(new_occupation_path)
-                preprocessWIKIFile(os.path.join(occupation_path, filename), os.path.join(new_occupation_path, newfilename), codec)
+                preprocessWIKIFile(os.path.join(occupation_path, filename), os.path.join(new_occupation_path, newfilename))
             except Exception as exc:
                 errfile = open('error.txt', 'a')
                 error = filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n'
@@ -156,40 +147,47 @@ def processWIKIFiles(path, codec='utf-8'):
                 errfile.close()
                 print(error)
             
-def preprocessTextFile(fileInput, fileOutput, codec='utf-8'):
+    
 
+def preprocessTextFile(fileInput, fileOutput):
     """
     Process a clean text file and generates the corresponding JSON file as output
     """
-    textStringInput=readFile(fileInput, codec)
+    textStringInput=readFile(fileInput)
     sentencesOutput=preprocessText(textStringInput)
     #print sentencesOutput
     writeFile(fileOutput,sentencesOutput)
     return
 
-def readFile(filename, codec='utf-8'):
+def readFile(filename):
     """ 
     Loads the specified file and returns its content.
     The file should not be binary.
     """
-       
-    f = codecs.open(filename, 'r', codec)
+    
+    #f = open(filename, 'r')
+    f = codecs.open(filename, 'r', 'utf-8')
     data = f.read()
     f.close()
     return data
 
-def writeFile(filename, sentencesOutput, codec='utf-8'):
+def writeFile(filename, sentencesOutput):
     """
     Converts the NLTK tree structure in sentencesOutput to JSON format.
     The JSON object is saved to the file specified by filename.
     """
     s=pprint_json_tree(sentencesOutput)
-    f = codecs.open(filename, 'w', codec)
+    f = codecs.open(filename, 'w', 'utf-8')
     f.write(s)
     f.close()
     return
 
-def process_files(rootpath, codec='utf-8'):
+def process_files(rootpath):
+    """
+    Processes all the files in the rootpath folder. It assumes that all the files are together in
+    a folder called 'original' inside the rootpath. Then it creates the folder 'processed_json' with 
+    the results inside.
+    """
     newpath = os.path.join(rootpath, 'processed_json')
     newpath = os.path.join(newpath, '')
     if not os.path.exists(newpath): os.makedirs(newpath)
@@ -202,7 +200,7 @@ def process_files(rootpath, codec='utf-8'):
         print 'Processing', filename + '...'
         try:  
             newfilename = 'processed_' + filename[9:-5] + '.json'            
-            preprocessHTMLFile(path + filename ,newpath + newfilename, codec)
+            preprocessHTMLFile(path + filename ,newpath + newfilename)
         except Exception as exc:
             errfile = open('error.txt', 'a')
             error = filename + ' has the error: ' + str(type(exc))[18:-2] + ': ' + str(exc) + '\r\n'
@@ -212,16 +210,17 @@ def process_files(rootpath, codec='utf-8'):
 
 if __name__ == '__main__':    
     
-    ### iterate the src   
+    ### iterate the src
+    
     #url = 'http://en.wikipedia.org/wiki/Mick_Jagger'
-    #data = getFile(url);   
-
-    processTextFiles('dataset','utf-8-sig')  # for windows the codec should be 'utf-8-sig' instead of 'utf-8'
+    #data = getFile(url);
+    
+    #processTextFiles('dataset')
         
-#     NonBioPATH = "NonBio"
-#     BioPATH = "Bio"
-#     BioPATH = "C:\Users\danip_000\Desktop"
-#     processWIKIFiles(BioPATH)
+    NonBioPATH = "NonBio"
+    BioPATH = "Bio"
+    BioPATH = "C:\Users\danip_000\Desktop"
+    processWIKIFiles(BioPATH)
 
     #PATH = "C:\Users\Dani\Desktop\NonBio"
     # process_files(PATH)
