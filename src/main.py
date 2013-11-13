@@ -133,7 +133,12 @@ def processTextFiles(path, codec='utf-8'):
 
 
 def processWIKIFiles(path, codec='utf-8'):
-    
+    """
+    Processes all the files assuming that they are from Wikipedia with wikimedia tags.
+    The path is assumed to be the root of a folder that contains a subfolder "occupaions"
+    which has inside a folder for every possible occupation, and inside that folder a folder called "docs"
+    with all the wiki files.
+    """
     newpath = os.path.join(path, 'clean')
     if not os.path.exists(newpath): os.makedirs(newpath)
     path = os.path.join(path, 'occupations')
@@ -141,7 +146,8 @@ def processWIKIFiles(path, codec='utf-8'):
     for occupation in occupations:
         occupation_path = os.path.join(path, os.path.join(occupation, 'docs'))
         files = os.listdir(occupation_path)
-        files.remove('index.txt')
+        if 'index.txt' in files:
+            files.remove('index.txt')
         for filename in files:
             print 'Processing', occupation +'/'+filename + '...'
             try:  
@@ -190,6 +196,11 @@ def writeFile(filename, sentencesOutput, codec='utf-8'):
     return
 
 def process_files(rootpath, codec='utf-8'):
+    """
+    Processes all the files in the rootpath folder. It assumes that all the files are together in
+    a folder called 'original' inside the rootpath. Then it creates the folder 'processed_json' with 
+    the results inside.
+    """
     newpath = os.path.join(rootpath, 'processed_json')
     newpath = os.path.join(newpath, '')
     if not os.path.exists(newpath): os.makedirs(newpath)
