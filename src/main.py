@@ -1,15 +1,6 @@
-'''
-Created on Oct 4, 2013
 
-@author: Jose
-'''
-
-from url2text import cleanHTML, cleanWIKI
-from namedEntity import processNE   
-from tokenizer import tokenize_sentences
-from tagger import tag_sentences
-from tree2json import pprint_json_tree
-from lemm_test import lemmstem
+from preprocessing_functions import cleanHTML, cleanWIKI, processNE, tokenize_sentences
+from preprocessing_functions import tag_sentences, pprint_json_tree, lemmstem
 import os
 import codecs
 
@@ -195,7 +186,7 @@ def writeFile(filename, sentencesOutput, codec='utf-8'):
     f.close()
     return
 
-def process_files(rootpath, codec='utf-8'):
+def processHTMLfiles(rootpath, codec='utf-8'):
     """
     Processes all the files in the rootpath folder. It assumes that all the files are together in
     a folder called 'original' inside the rootpath. Then it creates the folder 'processed_json' with 
@@ -212,7 +203,7 @@ def process_files(rootpath, codec='utf-8'):
     for filename in files:
         print 'Processing', filename + '...'
         try:  
-            newfilename = 'processed_' + filename[9:-5] + '.json'            
+            newfilename = 'processed_' + filename[:-5] + '.json'            
             preprocessHTMLFile(path + filename ,newpath + newfilename, codec)
         except Exception as exc:
             errfile = open('error.txt', 'a')
@@ -221,20 +212,11 @@ def process_files(rootpath, codec='utf-8'):
             errfile.close()
             print(error)
 
-if __name__ == '__main__':    
-    
-    ### iterate the src   
-    #url = 'http://en.wikipedia.org/wiki/Mick_Jagger'
-    #data = getFile(url);   
+if __name__ == '__main__':
 
-    processTextFiles('dataset','utf-8-sig')  # for windows the codec should be 'utf-8-sig' instead of 'utf-8'
+#    processTextFiles('dataset','utf-8-sig')  # for windows the codec should be 'utf-8-sig' instead of 'utf-8'
         
-#     NonBioPATH = "NonBio"
-#     BioPATH = "Bio"
-#     BioPATH = "C:\Users\danip_000\Desktop"
-#     processWIKIFiles(BioPATH)
-
-    #PATH = "C:\Users\Dani\Desktop\NonBio"
-    # process_files(PATH)
-    #PATH = "Bio"
-    #process_files(PATH)
+    NonBioPATH = "dataset\\NonBio"
+    processHTMLfiles(NonBioPATH)
+    BioPATH = "dataset\\Bio"
+    processWIKIFiles(BioPATH)
