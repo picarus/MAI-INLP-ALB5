@@ -5,7 +5,8 @@ Table of contents
 =================
 * Introduction
 * API
-* Processed corpus
+* NLTK, MODELS AND CORPUS
+* Processed dataset
 * JSON format
 * MySQL database
 
@@ -20,16 +21,25 @@ API
 ===
 The API is documented in the Python code following Python DOCSTRING guidelines.
 
-PROCESSED CORPUS
-================
-For the Non-biographical documents, the output format is a file folder structure, with two folders Original and Processed. In the case of biographical documents, the documents are separated by the occupation they correspond, generating an additional level of folders.
-For the Non-biographical documents each file is saved with the following format:
-Original_<id>.html or Processed<id>.json
+NLTK, MODELS AND CORPUS
+===============
+The NLTK Python library has been used in the implementation of the module. It must be installed in your system for the libraries to work.
+The following NLTK corpus must be downloaded to your system, using nltk.download() from the Python IDLE:
+* Treebank
+Analogously, the following NLTK models must also be installed:
+* Punkt
+
+
+PROCESSED DATASET
+=================
+For the Non-biographical documents, the output format is a file folder structure, with two folders "Original"(the input) and Processed(the output). In the case of biographical documents, the documents are separated by the occupation they correspond, generating an additional level of folders.
+For the Non-biographical documents, each file is expected to be of the format: 
+original_<id>.html 
+and will be saved with the following format:
+processed_<id>.json
 where <id> corresponds to the identifier of the file in the provided database. Detailed information is provided in a former section of the document.
-
-++++++++++++++++++++++++++++Add whatever is required here for this part+++++++++++++++++++++++
-
-For the Biographical documents the structure follows the scheme provided in the occupations.zip
+For the Biographical documents the structure follows the scheme provided in the occupations.zip in order to read the files.
+The generated files are stored in a folder named "clean".
 	
  
 JSON OUTPUT
