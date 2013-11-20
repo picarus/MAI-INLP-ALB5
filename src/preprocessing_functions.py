@@ -281,7 +281,6 @@ def pprint_json_tree(sentences):
         :return: A JSON representation of this tree.
         :rtype: str
         """
-
         text='['
         #reserved_chars = re.compile('"\/') # review !!!!
         first = True
@@ -292,7 +291,6 @@ def pprint_json_tree(sentences):
             text = text + output #re.sub(reserved_chars, r'\\\1', output)
             first = False
         text = text + ']'
-
         return text
     
     
@@ -318,8 +316,8 @@ def pprint(element, first, indent, nodesep='', quotes=False):
     if isinstance(element, Tree):                      
         s += '\n'+' '*(indent)+'{'
         indent += INDENT_STEP
-        s += '\n'+' '*(indent)+"tag:'"+element.node+"',"
-        s += '\n'+' '*(indent)+'content:'
+        s += '\n'+' '*(indent)+'"tag":"'+element.node+'",'
+        s += '\n'+' '*(indent)+'"content":'
         s += '\n'+' '*(indent)+'[' 
         for idx in xrange(0,len(element)):
             s += pprint(element[idx], idx==0, indent+INDENT_STEP, nodesep, quotes)
@@ -327,7 +325,7 @@ def pprint(element, first, indent, nodesep='', quotes=False):
         indent -= INDENT_STEP 
         s+= '\n'+' '*(indent)+'}'     
     elif isinstance(element, tuple):
-        s += '\n'+' '*(indent)+"['"+ "','".join([ elem for elem in element])+"']"
+        s += '\n'+' '*(indent)+'["'+ '","'.join([ elem for elem in element])+'"]'
     else:
         s=str(element)
             
