@@ -26,9 +26,8 @@ def tag_sentences(sentences_list):
     ## If it goes wrong, comment this part and use pos_tag function
     tagger = UnigramTagger(brown.tagged_sents(categories='news')[:500])    
     #tagged_words = [tagger.tag(s) for s in sentences_list]
-     
+    
     ## pos_tag is generalized Tagger for NLTK 
     tagged_sentences = [nltk.pos_tag(s) for s in sentences_list]
     
     return tagged_sentences;
-

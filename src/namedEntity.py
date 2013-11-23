@@ -32,4 +32,3 @@ def processNE(sentences):
     sentences = [ nltk.ne_chunk(sent) for sent in sentences]
     
     return sentences
-    
